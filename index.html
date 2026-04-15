@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TravelPro</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <h1>TravelPro</h1>
+
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#places">Places</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="favourite.html">Favourites</a></li>
+          <li id="userName"></li>
+          <li><a href="#" onclick="logout()">Logout</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="slides">
+        <img
+          src="https://images.pexels.com/photos/3155666/pexels-photo-3155666.jpeg"
+        />
+        <img
+          src="https://images.pexels.com/photos/346885/pexels-photo-346885.jpeg"
+        />
+        <img
+          src="https://images.pexels.com/photos/417074/pexels-photo-417074.jpeg"
+        />
+      </div>
+
+      <div class="overlay">
+        <h2>Explore The World 🌍</h2>
+        <p>Discover beautiful places</p>
+        <a href="#places"><button class="btn">Explore Now</button></a>
+      </div>
+    </section>
+
+    <!-- SEARCH -->
+    <section class="search-box">
+      <input type="text" id="search" placeholder="Search destination..." />
+    </section>
+
+    <!-- PLACES -->
+    <section id="places">
+      <h2 class="section-title">Popular Places</h2>
+
+      <div class="cards">
+        <div class="card" data-name="paris" onclick="openPage('paris')">
+          <img
+            src="https://images.pexels.com/photos/532826/pexels-photo-532826.jpeg"
+          />
+          <h3>Paris</h3>
+          <span class="like">🤍</span>
+        </div>
+
+        <div class="card" data-name="maldives" onclick="openPage('maldives')">
+          <img
+            src="https://images.pexels.com/photos/1287460/pexels-photo-1287460.jpeg"
+          />
+          <h3>Maldives</h3>
+          <span class="like">🤍</span>
+        </div>
+
+        <div class="card" data-name="kerala" onclick="openPage('kerala')">
+          <img
+            src="https://images.pexels.com/photos/962464/pexels-photo-962464.jpeg"
+          />
+          <h3>Kerala</h3>
+          <span class="like">🤍</span>
+        </div>
+
+        <div class="card" data-name="dubai" onclick="openPage('dubai')">
+          <img
+            src="https://images.pexels.com/photos/2044434/pexels-photo-2044434.jpeg"
+          />
+          <h3>Dubai</h3>
+          <span class="like">🤍</span>
+        </div>
+
+        <div class="card" data-name="bali" onclick="openPage('bali')">
+          <img
+            src="https://images.pexels.com/photos/2474690/pexels-photo-2474690.jpeg"
+          />
+          <h3>Bali</h3>
+          <span class="like">🤍</span>
+        </div>
+
+        <div class="card" data-name="goa" onclick="openPage('goa')">
+          <img
+            src="https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg"
+          />
+          <h3>Goa</h3>
+          <span class="like">🤍</span>
+        </div>
+
+        <div class="card" data-name="manali" onclick="openPage('manali')">
+          <img
+            src="https://images.pexels.com/photos/1586298/pexels-photo-1586298.jpeg"
+          />
+          <h3>Manali</h3>
+          <span class="like">🤍</span>
+        </div>
+
+        <div class="card" data-name="london" onclick="openPage('london')">
+          <img
+            src="https://images.pexels.com/photos/460672/pexels-photo-460672.jpeg"
+          />
+          <h3>London</h3>
+          <span class="like">🤍</span>
+        </div>
+
+        <div class="card" data-name="singapore" onclick="openPage('singapore')">
+          <img
+            src="https://images.pexels.com/photos/1051075/pexels-photo-1051075.jpeg"
+          />
+          <h3>Singapore</h3>
+          <span class="like">🤍</span>
+        </div>
+
+        <div class="card" data-name="newyork" onclick="openPage('newyork')">
+          <img
+            src="https://images.pexels.com/photos/466685/pexels-photo-466685.jpeg"
+          />
+          <h3>New York</h3>
+          <span class="like">🤍</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section id="gallery">
+      <h2 class="section-title">Gallery</h2>
+
+      <div class="gallery">
+        <img
+          src="https://images.pexels.com/photos/338515/pexels-photo-338515.jpeg"
+        />
+        <img
+          src="https://images.pexels.com/photos/699466/pexels-photo-699466.jpeg"
+        />
+        <img
+          src="https://images.pexels.com/photos/3601425/pexels-photo-3601425.jpeg"
+        />
+        <img
+          src="https://images.pexels.com/photos/1450353/pexels-photo-1450353.jpeg"
+        />
+        <img
+          src="https://images.pexels.com/photos/3787839/pexels-photo-3787839.jpeg"
+        />
+        <img
+          src="https://images.pexels.com/photos/417173/pexels-photo-417173.jpeg"
+        />
+        <img src="https://images.pexels.com/photos/21014/pexels-photo.jpg" />
+        <img
+          src="https://images.pexels.com/photos/572897/pexels-photo-572897.jpeg"
+        />
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="contact-box">
+        <h2>Contact Us</h2>
+        <input type="text" placeholder="Your Name" />
+        <input type="email" placeholder="Your Email" />
+        <textarea placeholder="Your Message"></textarea>
+        <button class="btn">Send Message</button>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-container">
+        <div>
+          <h3>TravelPro</h3>
+          <p>Explore the world 🌍</p>
+        </div>
+
+        <div>
+          <p>Home</p>
+          <p>Places</p>
+          <p>Gallery</p>
+        </div>
+
+        <div>
+          <p>Email: travel@gmail.com</p>
+        </div>
+      </div>
+
+      <p class="copy">© 2026 TravelPro</p>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

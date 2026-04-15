@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Favourites</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+<nav>
+<h1>TravelPro</h1>
+<ul>
+<li><a href="index.html">Home</a></li>
+<li><a href="favourite.html">Favourites</a></li>
+<li id="userName"></li>
+<li><a href="#" onclick="logout()">Logout</a></li>
+</ul>
+</nav>
+</header>
+
+<section>
+<h2 style="text-align:center; margin:20px;">❤️ Your Favourite Places</h2>
+
+<div class="cards" id="favCards"></div>
+</section>
+
+<script>
+
+/* USER NAME */
+const user = localStorage.getItem("name");
+if(user){
+document.getElementById("userName").innerHTML="👤 "+user;
+}
+
+/* LOGOUT */
+function logout(){
+localStorage.clear();
+window.location.href="login.html";
+}
+
+/* ALL PLACES DATA */
+const places = [
+{ name:"Paris", img:"https://images.pexels.com/photos/532826/pexels-photo-532826.jpeg?w=800" },
+{ name:"Maldives", img:"https://images.pexels.com/photos/1287460/pexels-photo-1287460.jpeg?w=800" },
+{ name:"Kerala", img:"https://images.pexels.com/photos/962464/pexels-photo-962464.jpeg?w=800" },
+{ name:"Dubai", img:"https://images.pexels.com/photos/2044434/pexels-photo-2044434.jpeg?w=800" },
+{ name:"Bali", img:"https://images.pexels.com/photos/2474690/pexels-photo-2474690.jpeg?w=800" },
+{ name:"Goa", img:"https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg?w=800" },
+{ name:"Manali", img:"https://images.pexels.com/photos/1586298/pexels-photo-1586298.jpeg?w=800" },
+{ name:"London", img:"https://images.pexels.com/photos/460672/pexels-photo-460672.jpeg?w=800" },
+{ name:"Singapore", img:"https://images.pexels.com/photos/1051075/pexels-photo-1051075.jpeg?w=800" },
+{ name:"Newyork", img:"https://images.pexels.com/photos/466685/pexels-photo-466685.jpeg?w=800" }
+];
+
+const container = document.getElementById("favCards");
+
+/* SHOW ONLY LIKED */
+places.forEach((place, index)=>{
+if(localStorage.getItem("like"+index)==="true"){
+
+let div=document.createElement("div");
+div.className="card";
+div.onclick=()=>window.location.href="details.html?place="+place.name.toLowerCase();
+
+div.innerHTML=`
+<img src="${place.img}">
+<h3>${place.name}</h3>
+`;
+
+container.appendChild(div);
+
+}
+});
+
+</script>
+
+</body>
+</html>

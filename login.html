@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login - TravelPro</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="auth-page">
+
+<div class="auth-container">
+
+<div class="auth-card">
+<h2>Welcome Back 👋</h2>
+<p>Login to continue your journey</p>
+
+<input type="email" id="loginEmail" placeholder="Enter Email">
+<input type="password" id="loginPass" placeholder="Enter Password">
+
+<button class="btn" onclick="login()">Login</button>
+
+<p class="switch">Don't have account? 
+<a href="signup.html">Signup</a></p>
+</div>
+
+</div>
+
+<script>
+function login(){
+let email=document.getElementById("loginEmail").value;
+let pass=document.getElementById("loginPass").value;
+
+let savedEmail=localStorage.getItem("email");
+let savedPass=localStorage.getItem("pass");
+
+if(email===savedEmail && pass===savedPass){
+alert("Login Successful");
+window.location.href="index.html";
+}else{
+alert("Invalid Details");
+}
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Signup - TravelPro</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="auth-page">
+
+<div class="auth-container">
+
+<div class="auth-card">
+<h2>Create Account 🚀</h2>
+<p>Start your journey with TravelPro</p>
+
+<div class="input-box">
+<input type="text" id="name" required>
+<label>👤 Full Name</label>
+</div>
+
+<div class="input-box">
+<input type="email" id="email" required>
+<label>📧 Email Address</label>
+</div>
+
+<div class="input-box password-box">
+<input type="password" id="pass" required>
+<label>🔒 Password</label>
+<span onclick="togglePass('pass')">👁</span>
+</div>
+
+<div class="input-box password-box">
+<input type="password" id="cpass" required>
+<label>🔐 Confirm Password</label>
+<span onclick="togglePass('cpass')">👁</span>
+</div>
+
+<p id="errorMsg" class="error"></p>
+
+<button class="btn" onclick="signup()">Create Account</button>
+
+<p class="switch">
+Already have an account? 
+<a href="login.html">Login</a>
+</p>
+
+</div>
+
+</div>
+
+<script>
+
+function togglePass(id){
+let input = document.getElementById(id);
+input.type = input.type === "password" ? "text" : "password";
+}
+
+function signup(){
+let name = document.getElementById("name").value.trim();
+let email = document.getElementById("email").value.trim();
+let pass = document.getElementById("pass").value.trim();
+let cpass = document.getElementById("cpass").value.trim();
+let error = document.getElementById("errorMsg");
+
+error.innerText = "";
+
+/* EMAIL VALIDATION */
+let emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+if(!email.match(emailPattern)){
+error.innerText = "⚠ Enter valid email";
+return;
+}
+
+/* EMPTY */
+if(name==="" || pass==="" || cpass===""){
+error.innerText = "⚠ Please fill all fields";
+return;
+}
+
+/* STRONG PASSWORD */
+let strongPass = /^(?=.*[A-Z])(?=.*\d).{6,}$/;
+if(!pass.match(strongPass)){
+error.innerText = "⚠ Password must have 1 uppercase, 1 number, min 6 chars";
+return;
+}
+
+/* MATCH */
+if(pass !== cpass){
+error.innerText = "⚠ Passwords do not match";
+return;
+}
+
+/* SAVE */
+localStorage.setItem("name",name);
+localStorage.setItem("email",email);
+localStorage.setItem("pass",pass);
+
+alert("Signup Successful 🎉");
+window.location.href="login.html";
+}
+
+</script>
+
+</body>
+</html>

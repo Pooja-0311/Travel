@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Details</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+<nav>
+<h1>TravelPro</h1>
+<ul>
+<li><a href="index.html">Home</a></li>
+<li><a href="favourite.html">Favourites</a></li>
+<li id="userName"></li>
+<li><a href="#" onclick="logout()">Logout</a></li>
+</ul>
+</nav>
+</header>
+
+<div class="details-box">
+
+<h1 id="title"></h1>
+<p id="desc"></p>
+
+<h3>✨ Highlights</h3>
+<p id="highlights"></p>
+
+<h3>📅 Best Time</h3>
+<p id="time"></p>
+
+<h3>📍 Places</h3>
+<p id="places"></p>
+
+<h3>📸 Gallery</h3>
+<div class="image-grid" id="images"></div>
+
+<h3>⭐ Rate this Place</h3>
+<div class="rating">
+<span data-value="1">⭐</span>
+<span data-value="2">⭐</span>
+<span data-value="3">⭐</span>
+<span data-value="4">⭐</span>
+<span data-value="5">⭐</span>
+</div>
+
+<p id="ratingResult"></p>
+
+<h3>💬 Comments</h3>
+<textarea id="commentBox" placeholder="Write comment..."></textarea>
+<button class="btn" onclick="addComment()">Post</button>
+
+<div id="commentsList"></div>
+
+</div>
+
+<script>
+
+/* USER */
+const user = localStorage.getItem("name");
+if(user){
+document.getElementById("userName").innerHTML="👤 "+user;
+}
+
+/* LOGOUT */
+function logout(){
+localStorage.clear();
+window.location.href="login.html";
+}
+
+/* GET PLACE */
+const params = new URLSearchParams(window.location.search);
+const place = params.get("place");
+
+/* FULL DATA WITH MULTIPLE IMAGES */
+const data = {
+
+paris:{
+title:"Paris",
+desc:"Paris is the capital of France and known for romance and culture.",
+highlights:"Eiffel Tower, Museums",
+time:"April to June",
+places:"Eiffel Tower, Louvre",
+images:[
+"https://images.pexels.com/photos/338515/pexels-photo-338515.jpeg",
+"https://images.pexels.com/photos/699466/pexels-photo-699466.jpeg",
+"https://images.pexels.com/photos/532826/pexels-photo-532826.jpeg"
+]
+},
+
+maldives:{
+title:"Maldives",
+desc:"Tropical paradise with crystal clear water.",
+highlights:"Beaches, Resorts",
+time:"Nov to April",
+places:"Male, Islands",
+images:[
+"https://images.pexels.com/photos/1287460/pexels-photo-1287460.jpeg",
+"https://images.pexels.com/photos/3601425/pexels-photo-3601425.jpeg",
+"https://images.pexels.com/photos/1450353/pexels-photo-1450353.jpeg"
+]
+},
+
+kerala:{
+title:"Kerala",
+desc:"God’s Own Country with greenery.",
+highlights:"Backwaters, Tea gardens",
+time:"Oct to March",
+places:"Munnar, Alleppey",
+images:[
+"https://images.pexels.com/photos/962464/pexels-photo-962464.jpeg",
+"https://images.pexels.com/photos/417173/pexels-photo-417173.jpeg",
+"https://images.pexels.com/photos/417074/pexels-photo-417074.jpeg"
+]
+},
+
+dubai:{
+title:"Dubai",
+desc:"Luxury city with skyscrapers.",
+highlights:"Burj Khalifa",
+time:"Nov to March",
+places:"Dubai Mall",
+images:[
+"https://images.pexels.com/photos/2044434/pexels-photo-2044434.jpeg",
+"https://images.pexels.com/photos/3787839/pexels-photo-3787839.jpeg",
+"https://images.pexels.com/photos/1470502/pexels-photo-1470502.jpeg"
+]
+},
+
+bali:{
+title:"Bali",
+desc:"Beautiful island in Indonesia.",
+highlights:"Temples, Beaches",
+time:"Apr to Oct",
+places:"Ubud",
+images:[
+"https://images.pexels.com/photos/2474690/pexels-photo-2474690.jpeg",
+"https://images.pexels.com/photos/753339/pexels-photo-753339.jpeg",
+"https://images.pexels.com/photos/338515/pexels-photo-338515.jpeg"
+]
+},
+
+goa:{
+title:"Goa",
+desc:"Famous beach destination in India.",
+highlights:"Nightlife",
+time:"Nov to Feb",
+places:"Baga Beach",
+images:[
+"https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg",
+"https://images.pexels.com/photos/21014/pexels-photo.jpg",
+"https://images.pexels.com/photos/572897/pexels-photo-572897.jpeg"
+]
+},
+
+manali:{
+title:"Manali",
+desc:"Snowy hill station.",
+highlights:"Adventure sports",
+time:"Oct to Feb",
+places:"Solang Valley",
+images:[
+"https://images.pexels.com/photos/1586298/pexels-photo-1586298.jpeg",
+"https://images.pexels.com/photos/417173/pexels-photo-417173.jpeg",
+"https://images.pexels.com/photos/753339/pexels-photo-753339.jpeg"
+]
+},
+
+london:{
+title:"London",
+desc:"Capital of UK.",
+highlights:"Big Ben",
+time:"March to May",
+places:"London Eye",
+images:[
+"https://images.pexels.com/photos/460672/pexels-photo-460672.jpeg",
+"https://images.pexels.com/photos/1797161/pexels-photo-1797161.jpeg",
+"https://images.pexels.com/photos/338515/pexels-photo-338515.jpeg"
+]
+},
+
+singapore:{
+title:"Singapore",
+desc:"Modern smart city.",
+highlights:"Marina Bay",
+time:"Feb to April",
+places:"Sentosa",
+images:[
+"https://images.pexels.com/photos/1051075/pexels-photo-1051075.jpeg",
+"https://images.pexels.com/photos/1450353/pexels-photo-1450353.jpeg",
+"https://images.pexels.com/photos/3601425/pexels-photo-3601425.jpeg"
+]
+},
+
+newyork:{
+title:"New York",
+desc:"Famous US city.",
+highlights:"Times Square",
+time:"Apr to June",
+places:"Central Park",
+images:[
+"https://images.pexels.com/photos/466685/pexels-photo-466685.jpeg",
+"https://images.pexels.com/photos/417173/pexels-photo-417173.jpeg",
+"https://images.pexels.com/photos/338515/pexels-photo-338515.jpeg"
+]
+}
+
+};
+
+/* LOAD DATA */
+if(data[place]){
+document.getElementById("title").innerText=data[place].title;
+document.getElementById("desc").innerText=data[place].desc;
+document.getElementById("highlights").innerText=data[place].highlights;
+document.getElementById("time").innerText=data[place].time;
+document.getElementById("places").innerText=data[place].places;
+
+const box=document.getElementById("images");
+data[place].images.forEach(src=>{
+let img=document.createElement("img");
+img.src=src;
+box.appendChild(img);
+});
+}
+
+/* ⭐ RATING */
+const stars = document.querySelectorAll(".rating span");
+
+stars.forEach(star=>{
+star.addEventListener("click", ()=>{
+let value = star.getAttribute("data-value");
+
+let ratings = JSON.parse(localStorage.getItem(place+"_ratings")) || [];
+ratings.push(Number(value));
+localStorage.setItem(place+"_ratings", JSON.stringify(ratings));
+
+highlightStars(value);
+showAverage();
+});
+});
+
+function highlightStars(value){
+stars.forEach(star=>{
+if(star.getAttribute("data-value") <= value){
+star.classList.add("active");
+}else{
+star.classList.remove("active");
+}
+});
+}
+
+const saved = JSON.parse(localStorage.getItem(place+"_ratings")) || [];
+if(saved.length > 0){
+highlightStars(saved[saved.length-1]);
+}
+
+function showAverage(){
+let ratings = JSON.parse(localStorage.getItem(place+"_ratings")) || [];
+if(ratings.length===0) return;
+
+let avg = (ratings.reduce((a,b)=>a+b,0)/ratings.length).toFixed(1);
+
+document.getElementById("ratingResult").innerText =
+"Average Rating: "+avg+" ⭐";
+}
+showAverage();
+
+/* COMMENTS */
+function addComment(){
+let text = document.getElementById("commentBox").value;
+let user = localStorage.getItem("name");
+
+if(text==="") return;
+
+let comments = JSON.parse(localStorage.getItem(place+"_comments")) || [];
+comments.push({name:user, msg:text});
+
+localStorage.setItem(place+"_comments", JSON.stringify(comments));
+
+document.getElementById("commentBox").value="";
+showComments();
+}
+
+function showComments(){
+let comments = JSON.parse(localStorage.getItem(place+"_comments")) || [];
+
+let html="";
+comments.forEach(c=>{
+html += `<p><b>👤 ${c.name}</b><br>${c.msg}</p>`;
+});
+
+document.getElementById("commentsList").innerHTML = html;
+}
+
+showComments();
+
+</script>
+
+</body>
+</html>
